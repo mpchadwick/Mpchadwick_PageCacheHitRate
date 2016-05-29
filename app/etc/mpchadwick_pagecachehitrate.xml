@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <cache>
+            <request_processors>
+                <mpchadwick_pagecachehitrate>Mpchadwick_PageCacheHitRate_Model_Processor</mpchadwick_pagecachehitrate>
+            </request_processors>
+        </cache>
+        <full_page_cache>
+            <tracker>Mpchadwick_PageCacheHitRate_Model_Tracker_File</tracker>
+        </full_page_cache>
+    </global>
+</config>
+
