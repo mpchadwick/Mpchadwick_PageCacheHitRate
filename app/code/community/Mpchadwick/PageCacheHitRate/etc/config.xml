@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mpchadwick_PageCacheHitRate>
+            <version>0.1.0</version>
+        </Mpchadwick_PageCacheHitRate>
+    </modules>
+    <global>
+        <models>
+            <mpchadwick_pagecachehitrate>
+                <class>Mpchadwick_PageCacheHitRate_Model</class>
+            </mpchadwick_pagecachehitrate>
+        </models>
+    </global>
+    <frontend>
+        <events>
+            <controller_front_send_response_before>
+                <observers>
+                    <mpchadwick_pagecachehitrate>
+                        <class>Mpchadwick_PageCacheHitRate_Model_Observer</class>
+                        <method>handleControllerFrontSendResponseBefore</method>
+                    </mpchadwick_pagecachehitrate>
+                </observers>
+            </controller_front_send_response_before>
+        </events>
+    </frontend>
+</config>
