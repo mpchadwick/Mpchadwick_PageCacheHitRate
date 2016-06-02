@@ -1,0 +1,4 @@
+#Mpchadwick_PageCacheHitRate
+app/code/community/Mpchadwick/PageCacheHitRate
+app/etc/mpchadwick_pagecachehitrate.xml
+app/etc/modules/Mpchadwick_PageCacheHitRate.xml
