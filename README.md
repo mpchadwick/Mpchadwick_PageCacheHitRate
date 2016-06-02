@@ -4,7 +4,7 @@ Hit rate tracking for Magento Page Cache.
 
 ###Configuration
 
-All configuration is done through an XML file in the `/app/etc` directory. This is because module configuration is not loaded in the case of a full hit. `mpchadwick_pagecachehitrate.xml` is included with default settings. A few notes...
+All configuration is done through an XML file in the `/app/etc` directory. This is because module configuration is not loaded in the case of a full hit. `mpchadwick_pagecachehitrate.xml.template` is included with example settings. A few notes...
 
 - `Mpchadwick_PageCacheHitRate_Model_Processor` is added as a `<request_processor>`.
   - **Note:** `request_processor`s are loaded alphabetically based on the file name in `/app/etc`. It is important that `Mpchadwick_PageCacheHitRate_Model_Processor` be the final `request_processor` to know for sure if this is a full hit. By default the `Enterprise_PageCache_Model_Processor` is defined in `enterprise.xml` and will be loaded first, however if your are using something else to process the result of `Enterprise_PageCache_Model_Processor` you may need to change the file name in `/app/etc`.
