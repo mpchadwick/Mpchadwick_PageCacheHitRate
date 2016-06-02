@@ -35,7 +35,7 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
      * Get the type of response.
      *
      * Enterprise_PageCache_Model_Processor::_processContent() will store an array of
-     * `cache_page_containers` in Mage::_registry for partial hits.
+     * `cached_page_containers` in Mage::_registry for partial hits.
      *
      * @return string
      */
