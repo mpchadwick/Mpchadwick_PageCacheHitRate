@@ -8,6 +8,7 @@
         </cache>
         <full_page_cache>
             <tracker>Mpchadwick_PageCacheHitRate_Model_Tracker_File</tracker>
+            <track_container_misses>1</track_container_misses>
         </full_page_cache>
     </global>
 </config>

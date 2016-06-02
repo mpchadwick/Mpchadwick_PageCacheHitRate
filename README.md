@@ -9,6 +9,7 @@ All configuration is done through an XML file in the `/app/etc` directory. This 
 - `Mpchadwick_PageCacheHitRate_Model_Processor` is added as a `<request_processor>`.
   - **Note:** `request_processor`s are loaded alphabetically based on the file name in `/app/etc`. It is important that `Mpchadwick_PageCacheHitRate_Model_Processor` be the final `request_processor` to know for sure if this is a full hit. By default the `Enterprise_PageCache_Model_Processor` is defined in `enterprise.xml` and will be loaded first, however if your are using something else to process the result of `Enterprise_PageCache_Model_Processor` you may need to change the file name in `/app/etc`.
 - A `<tracker>` can be configured your `<full_page_cache>` configuration. If this node is omitted, hit rate will not be tracked.
+- There is a `<track_container_misses>` setting which can be used to track individual container misses in the case of partial page hits.
 
 ###Trackers
 
@@ -31,4 +32,10 @@ Here are some example entries using the `Mpchadwick_PageCacheHitRate_Model_Track
 2016-06-02T02:28:04+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"miss","route":"catalog\/category\/view"}
 2016-06-02T02:28:09+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"partial","route":"catalog\/category\/view"}
 2016-06-02T02:28:11+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"hit","route":"catalog\/category\/view"}
+```
+
+Container misses will be recorded to a separate file (if enabled). The entries will look like this...
+
+```
+2016-06-02T03:18:14+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/women\/women-new-arrivals.html","ip":"172.16.9.1","route":"catalog\/category\/view","container":"Enterprise_PageCache_Model_Container_Catalognavigation"}
 ```

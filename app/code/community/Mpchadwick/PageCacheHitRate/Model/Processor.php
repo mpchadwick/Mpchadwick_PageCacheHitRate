@@ -29,7 +29,7 @@ class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_M
                 'type' => 'hit',
                 'route' => $this->trackerRoute(),
             );
-            $tracker->track($params);
+            $tracker->track('RequestResponse', $params);
         }
 
         return $content;
