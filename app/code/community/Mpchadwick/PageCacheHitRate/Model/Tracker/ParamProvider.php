@@ -13,6 +13,8 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider
     protected function getUrl()
     {
         $request = Mage::app()->getRequest();
+
+        // @todo Why isn't this getting the alias for misses?
         return $request->getScheme() . '://' .
             $request->getHttpHost() .
             $request->getRequestUri();
