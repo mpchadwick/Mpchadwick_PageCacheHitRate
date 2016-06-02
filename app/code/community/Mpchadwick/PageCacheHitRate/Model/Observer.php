@@ -22,7 +22,7 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
         }
 
         $paramProvider = Mage::getModel('mpchadwick_pagecachehitrate/tracker_paramProvider');
-        $params = $paramProvider->baseParams() + array(
+        $params = $paramProvider->baseParams(true) + array(
             'type' => $this->type(),
             'route' => $this->trackerRoute(),
         );

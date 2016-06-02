@@ -28,7 +28,7 @@ In addition to `type`, the following metrics are tracked for each response `rout
 Here are some example entries using the `Mpchadwick_PageCacheHitRate_Model_Tracker_File` tracker...
 
 ```
-2016-06-02T01:20:56+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/catalog\/product\/view\/id\/418","ip":"172.16.9.1","type":"miss","route":"catalog\/product\/view"}
-2016-06-02T01:21:00+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/women\/women-new-arrivals\/tori-tank-546.html","ip":"172.16.9.1","type":"partial","route":"catalog\/product\/view"}
-2016-06-02T01:21:15+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/women\/women-new-arrivals\/tori-tank-546.html","ip":"172.16.9.1","type":"hit","route":"catalog\/product\/view"}
+2016-06-02T02:28:04+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"miss","route":"catalog\/category\/view"}
+2016-06-02T02:28:09+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"partial","route":"catalog\/category\/view"}
+2016-06-02T02:28:11+00:00 DEBUG (7): {"url":"http:\/\/magento-1_14_1_0.dev\/men\/shirts.html","ip":"172.16.9.1","type":"hit","route":"catalog\/category\/view"}
 ```
