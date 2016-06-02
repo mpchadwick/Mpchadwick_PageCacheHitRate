@@ -10,6 +10,7 @@ All configuration is done through an XML file in the `/app/etc` directory. This 
   - **Note:** `request_processor`s are loaded alphabetically based on the file name in `/app/etc`. It is important that `Mpchadwick_PageCacheHitRate_Model_Processor` be the final `request_processor` to know for sure if this is a full hit. By default the `Enterprise_PageCache_Model_Processor` is defined in `enterprise.xml` and will be loaded first, however if your are using something else to process the result of `Enterprise_PageCache_Model_Processor` you may need to change the file name in `/app/etc`.
 - A `<tracker>` can be configured your `<full_page_cache>` configuration. If this node is omitted, hit rate will not be tracked.
 - There is a `<track_container_misses>` setting which can be used to track individual container misses in the case of partial page hits.
+- A `<metadata_source>` can be configured under the `<full_page_cache>` configuration in the case where Enterprise_PageCache_Model_Processor is not the correct class to provide metadata. This can happen if the `<ee>` request processor is changed, notably with `Elastera_EnterprisePageCache`.
 
 ###Trackers
 

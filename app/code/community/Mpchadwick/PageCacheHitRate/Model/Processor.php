@@ -2,6 +2,8 @@
 
 class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_Model_Processor
 {
+    const XML_PATH_METADATA_SOURCE = 'global/full_page_cache/metadata_source';
+
     /**
      * Get page content from cache storage.
      *
@@ -39,14 +41,29 @@ class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_M
      * Get the route for tracking.
      *
      * This info hasn't been set on the request yet, but fortunately Magento
-     * stores it as "metadata".
+     * stores it as "metadata" in cache.
+     *
+     * Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_Model_Processor
+     * but it is possible that we cannot retrieve metadata from that class. Notably, if we're
+     * using Elastera_EnterprisePageCache, the documentation for which instructs us to change the
+     * ee request processor.
+     *
+     * As such, we can configure an alternate source for metadata if needed
      *
      * @return string
      */
     protected function trackerRoute()
     {
-        return $this->getMetadata('routing_requested_route') . '/' .
-            $this->getMetadata('routing_requested_controller') . '/' .
-            $this->getMetadata('routing_requested_action');
+        $configured = (string)Mage::getConfig()->getNode(self::XML_PATH_METADATA_SOURCE);
+
+        if (class_exists($configured)) {
+            $source = new $configured;
+        } else {
+            $source = $this;
+        }
+
+        return $source->getMetadata('routing_requested_route') . '/' .
+            $source->getMetadata('routing_requested_controller') . '/' .
+            $source->getMetadata('routing_requested_action');
     }
 }
