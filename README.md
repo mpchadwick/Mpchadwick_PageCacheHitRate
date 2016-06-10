@@ -17,7 +17,7 @@ All configuration is done through an XML file in the `/app/etc` directory. This 
 The following trackers are available...
 
 - **`Mpchadwick_PageCacheHitRate_Model_Tracker_File`** A log file will be used for for tracking hit rate. A new file will be created each day.
-- **`Mpchadwick_PageCacheHitRate_Model_Tracker_NewRelic`** Hits and misses will be tracked as [New Relic custom events](https://docs.newrelic.com/docs/insights/new-relic-insights/adding-querying-data/inserting-custom-events-new-relic-apm-agents). [NOTE: untested].
+- **`Mpchadwick_PageCacheHitRate_Model_Tracker_NewRelic`** Hits and misses will be tracked as [New Relic custom events](https://docs.newrelic.com/docs/insights/new-relic-insights/adding-querying-data/inserting-custom-events-new-relic-apm-agents).
 
 You can easily create your own tracker if you'd prefer a different means of tracking. Simply implement the `Mpchadwick_PageCacheHitRate_Model_TrackerInterface` interface and configure your class as the `<tracker>` in an xml file in `/app/etc`.
 
