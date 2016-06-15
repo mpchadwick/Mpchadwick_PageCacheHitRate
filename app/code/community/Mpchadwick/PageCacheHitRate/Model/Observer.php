@@ -15,11 +15,10 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
      */
     public function handleControllerFrontSendResponseBefore(Varien_Event_Observer $observer)
     {
-        $factory = Mage::getModel('mpchadwick_pagecachehitrate/trackerFactory');
-        $tracker = $factory->getTracker();
-
-        // A tracker isn't configured. Bail.
-        if (!$tracker) {
+        $config = Mage::getModel('mpchadwick_pagecachehitrate/config');
+        $trackers = $config->get('trackers');
+        if (!$trackers) {
+            // We're not tracking, bail...
             return;
         }
 
@@ -29,13 +28,18 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
             'type' => $type,
             'route' => $this->trackerRoute(),
         );
-        $tracker->track('RequestResponse', $params);
 
-        // Track any container misses for a partial cache response
-        $trackContainerMisses = (string)Mage::getConfig()->getNode(self::XML_PATH_TRACK_CONTAINER_MISSES);
-        if ($type === 'partial' && $trackContainerMisses) {
-            unset($params['type']);
-            $tracker->trackContainerMisses($params);
+        $factory = Mage::getModel('mpchadwick_pagecachehitrate/trackerFactory');
+        foreach ($trackers->asArray() as $data) {
+            $tracker = $factory->build($data['class']);
+            $tracker->track('RequestResponse', $params);
+
+            // Track any container misses for a partial cache response
+            $trackContainerMisses = (string)Mage::getConfig()->getNode(self::XML_PATH_TRACK_CONTAINER_MISSES);
+            if ($type === 'partial' && $trackContainerMisses) {
+                unset($params['type']);
+                $tracker->trackContainerMisses($params);
+            }
         }
     }
 
