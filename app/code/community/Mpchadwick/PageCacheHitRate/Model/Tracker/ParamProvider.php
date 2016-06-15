@@ -8,6 +8,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider
             'url' => $this->getUrl($originalRequest),
             'ip' => Mage::app()->getRequest()->getClientIp(),
             'hostname' => gethostname(),
+            'customerGroup' => $this->getCustomerGroup(),
         );
     }
 
@@ -24,5 +25,11 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider
         return $request->getScheme() . '://' .
             $request->getHttpHost() .
             $request->getRequestUri();
+    }
+
+    protected function getCustomerGroup()
+    {
+        $value = $_COOKIE[Enterprise_PageCache_Model_Cookie::COOKIE_CUSTOMER_GROUP];
+        return (string)$value;
     }
 }
