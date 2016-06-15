@@ -46,14 +46,18 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
     /**
      * Get the type of response.
      *
-     * Enterprise_PageCache_Model_Processor::_processContent() will store an array of
-     * `cached_page_containers` in Mage::_registry for partial hits.
+     * Partial hits will be handled by `pagecache/request/process`.
      *
      * @return string
      */
     protected function type()
     {
-        if (Mage::registry('cached_page_containers')) {
+        $request = Mage::app()->getRequest();
+
+        if ($request->getModuleName() === 'pagecache' &&
+            $request->getControllerName() === 'request' &&
+            $request->getActionName() === 'process'
+        ) {
             return 'partial';
         } else {
             return 'miss';
