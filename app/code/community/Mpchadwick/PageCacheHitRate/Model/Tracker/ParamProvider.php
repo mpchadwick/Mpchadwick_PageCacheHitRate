@@ -7,6 +7,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider
         return array(
             'url' => $this->getUrl($originalRequest),
             'ip' => Mage::app()->getRequest()->getClientIp(),
+            'hostname' => gethostname(),
         );
     }
 
