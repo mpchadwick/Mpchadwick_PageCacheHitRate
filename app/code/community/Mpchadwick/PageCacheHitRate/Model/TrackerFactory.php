@@ -4,7 +4,7 @@ class Mpchadwick_PageCacheHitRate_Model_TrackerFactory
 {
     // We are resolving in enterprise.xml because module config hasn't been loaded
     // yet if the request is being handled through page cache
-    const XML_PATH_TRACKER = 'global/full_page_cache/tracker';
+    const XML_PATH_TRACKER = 'global/full_page_cache/mpchadwick_pagecachehitrate/tracker';
 
     public function getTracker()
     {

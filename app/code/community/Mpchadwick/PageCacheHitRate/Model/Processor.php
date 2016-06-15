@@ -2,7 +2,7 @@
 
 class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_Model_Processor
 {
-    const XML_PATH_METADATA_SOURCE = 'global/full_page_cache/metadata_source';
+    const XML_PATH_METADATA_SOURCE = 'global/full_page_cache/mpchadwick_pagecachehitrate/metadata_source';
 
     /**
      * Get page content from cache storage.

@@ -2,7 +2,7 @@
 
 class Mpchadwick_PageCacheHitRate_Model_Observer
 {
-    const XML_PATH_TRACK_CONTAINER_MISSES = 'global/full_page_cache/track_container_misses';
+    const XML_PATH_TRACK_CONTAINER_MISSES = 'global/full_page_cache/mpchadwick_pagecachehitrate/track_container_misses';
 
     /**
      * Handle the controller_front_send_response_before event.
