@@ -2,5 +2,5 @@
 
 interface Mpchadwick_PageCacheHitRate_Model_TrackerInterface
 {
-    // protected function _track()
+    public function track($type, array $args, $alias);
 }

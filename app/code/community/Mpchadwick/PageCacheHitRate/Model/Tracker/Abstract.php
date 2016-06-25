@@ -2,6 +2,8 @@
 
 abstract class Mpchadwick_PageCacheHitRate_Model_Tracker_Abstract
 {
+    abstract protected function _track($type, array $args, $alias);
+
     public function track($type, array $args, $alias)
     {
         $config = new Mpchadwick_PageCacheHitRate_Model_Config;
