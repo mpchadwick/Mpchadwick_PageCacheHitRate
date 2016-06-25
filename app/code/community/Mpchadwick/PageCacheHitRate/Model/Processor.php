@@ -38,9 +38,9 @@ class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_M
         );
 
         $factory = new Mpchadwick_PageCacheHitRate_Model_TrackerFactory;
-        foreach ($trackers->asArray() as $data) {
+        foreach ($trackers->asArray() as $alias => $data) {
             $tracker = $factory->build($data['class']);
-            $tracker->track('RequestResponse', $params);
+            $tracker->track('RequestResponse', $params, $alias);
         }
 
         return $content;
