@@ -15,6 +15,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     public function __construct()
     {
         $this->config = new Mpchadwick_PageCacheHitRate_Model_Config;
+        $this->logger = new Mpchadwick_PageCacheHitRate_Model_SystemLog;
     }
 
     protected function _track($type, array $args, $alias)
@@ -44,8 +45,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
         $db = $this->config->get($prefix) . 'database';
 
         if (!$server || !$port || !$db) {
-            $message = 'Missing parameters for creating Redis connection';
-            Mage::logException(new Exception($message));
+            $this->logger->log('Missing parameters for creating Redis connection', Zend_Log::ERR);
             return false;
         }
 
@@ -57,7 +57,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
             $this->redis->connect();
             $this->redis->select($this->config->get($prefix . 'database'));
         } catch (Exception $e) {
-            // @todo Why is Mage::logException() leading to a 404?
+            $this->logger->log('Could not establish Redis connection', Zend_Log::ERR);
             return false;
         }
 
