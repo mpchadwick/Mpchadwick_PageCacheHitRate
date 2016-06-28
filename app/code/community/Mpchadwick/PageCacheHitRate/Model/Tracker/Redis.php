@@ -27,7 +27,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     protected function setupConnection($alias)
     {
         if (!is_null($this->redis)) {
-            return;
+            return true;
         }
 
         $prefix = 'trackers/' . $alias . '/';
