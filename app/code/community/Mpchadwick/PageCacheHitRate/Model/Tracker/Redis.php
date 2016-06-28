@@ -54,7 +54,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
             $this->redis->connect();
             $this->redis->select($this->config->get($prefix . 'database'));
         } catch (Exception $e) {
-            $this->logger->log('Could not establish Redis connection', Zend_Log::ERR);
+            $this->logger->log($e->getMessage(), Zend_Log::ERR);
             return false;
         }
 
