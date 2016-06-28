@@ -2,7 +2,7 @@
 
 class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_Model_Processor
 {
-    const XML_PATH_METADATA_SOURCE = 'global/full_page_cache/metadata_source';
+    const XML_PATH_METADATA_SOURCE = 'global/full_page_cache/mpchadwick_pagecachehitrate/metadata_source';
 
     /**
      * Get page content from cache storage.
@@ -21,16 +21,25 @@ class Mpchadwick_PageCacheHitRate_Model_Processor extends Enterprise_PageCache_M
             return $content;
         }
 
-        // Note: We can't resolve models through Mage::getModel() this early
+        // We can't resolve models through Mage::getModel() this early
         // in the execution
+        $config = new Mpchadwick_PageCacheHitRate_Model_Config;
+        $trackers = $config->get('trackers');
+
+        if (!$trackers) {
+            // Bail, we're not tracking anything
+            return $content;
+        }
+
+        $paramProvider = new Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider;
+        $params = $paramProvider->baseParams() + array(
+            'type' => 'hit',
+            'route' => $this->trackerRoute(),
+        );
+
         $factory = new Mpchadwick_PageCacheHitRate_Model_TrackerFactory;
-        $tracker = $factory->getTracker();
-        if ($tracker) {
-            $paramProvider = new Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider;
-            $params = $paramProvider->baseParams() + array(
-                'type' => 'hit',
-                'route' => $this->trackerRoute(),
-            );
+        foreach ($trackers->asArray() as $data) {
+            $tracker = $factory->build($data['class']);
             $tracker->track('RequestResponse', $params);
         }
 

@@ -7,8 +7,14 @@
             </request_processors>
         </cache>
         <full_page_cache>
-            <tracker>Mpchadwick_PageCacheHitRate_Model_Tracker_File</tracker>
-            <track_container_misses>1</track_container_misses>
+            <mpchadwick_pagecachehitrate>
+                <trackers>
+                    <file>
+                        <class>Mpchadwick_PageCacheHitRate_Model_Tracker_File</class>
+                    </file>
+                </trackers>
+                <track_container_misses>1</track_container_misses>
+            </mpchadwick_pagecachehitrate>
         </full_page_cache>
     </global>
 </config>

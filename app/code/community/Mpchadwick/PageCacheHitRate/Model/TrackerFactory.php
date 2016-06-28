@@ -2,17 +2,8 @@
 
 class Mpchadwick_PageCacheHitRate_Model_TrackerFactory
 {
-    // We are resolving in enterprise.xml because module config hasn't been loaded
-    // yet if the request is being handled through page cache
-    const XML_PATH_TRACKER = 'global/full_page_cache/tracker';
-
-    public function getTracker()
+    public function build($class)
     {
-        $class = (string)Mage::getConfig()->getNode(self::XML_PATH_TRACKER);
-        if (!$class) {
-            return false;
-        }
-
         if (class_exists($class)) {
             return new $class;
         } else {
