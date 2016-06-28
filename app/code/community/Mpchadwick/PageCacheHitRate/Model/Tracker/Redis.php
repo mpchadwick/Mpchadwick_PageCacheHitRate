@@ -9,15 +9,6 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     /** @var Credis_Client */
     protected $redis;
 
-    /** @var Mpchadwick_PageCacheHitRate_Model_Config */
-    protected $config;
-
-    public function __construct()
-    {
-        $this->config = new Mpchadwick_PageCacheHitRate_Model_Config;
-        $this->logger = new Mpchadwick_PageCacheHitRate_Model_SystemLog;
-    }
-
     protected function _track($type, array $args, $alias)
     {
         $result = $this->setupConnection($alias);

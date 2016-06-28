@@ -2,6 +2,18 @@
 
 abstract class Mpchadwick_PageCacheHitRate_Model_Tracker_Abstract
 {
+    /** @var Mpchadwick_PageCacheHitRate_Model_Config */
+    protected $config;
+
+    /** @var Mpchadwick_PageCacheHitRate_Model_SystemLog */
+    protected $logger;
+
+    public function __construct()
+    {
+        $this->config = new Mpchadwick_PageCacheHitRate_Model_Config;
+        $this->logger = new Mpchadwick_PageCacheHitRate_Model_SystemLog;
+    }
+
     abstract protected function _track($type, array $args, $alias);
 
     public function track($type, array $args, $alias)
