@@ -6,7 +6,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_File
 {
     protected $file = 'mpchadwick_pagecachehitrate_';
 
-    public function track($type, array $args)
+    protected function _track($type, array $args, $alias)
     {
         Mage::log(json_encode($args), null, $this->file($type), true);
     }

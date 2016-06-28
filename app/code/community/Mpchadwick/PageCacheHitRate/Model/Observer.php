@@ -30,9 +30,9 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
         );
 
         $factory = Mage::getModel('mpchadwick_pagecachehitrate/trackerFactory');
-        foreach ($trackers->asArray() as $data) {
+        foreach ($trackers->asArray() as $alias => $data) {
             $tracker = $factory->build($data['class']);
-            $tracker->track('RequestResponse', $params);
+            $tracker->track('RequestResponse', $params, $alias);
 
             // Track any container misses for a partial cache response
             $trackContainerMisses = (string)Mage::getConfig()->getNode(self::XML_PATH_TRACK_CONTAINER_MISSES);
