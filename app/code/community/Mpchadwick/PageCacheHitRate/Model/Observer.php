@@ -2,8 +2,6 @@
 
 class Mpchadwick_PageCacheHitRate_Model_Observer
 {
-    const XML_PATH_TRACK_CONTAINER_MISSES = 'global/full_page_cache/mpchadwick_pagecachehitrate/track_container_misses';
-
     /**
      * Handle the controller_front_send_response_before event.
      *
@@ -35,7 +33,7 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
             $tracker->track('RequestResponse', $params, $alias);
 
             // Track any container misses for a partial cache response
-            $trackContainerMisses = (string)Mage::getConfig()->getNode(self::XML_PATH_TRACK_CONTAINER_MISSES);
+            $trackContainerMisses = (string)$config->get('track_container_misses');
             if ($type === 'partial' && $trackContainerMisses) {
                 unset($params['type']);
                 $tracker->trackContainerMisses($params);
