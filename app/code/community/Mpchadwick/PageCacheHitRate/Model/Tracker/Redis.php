@@ -9,13 +9,10 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     /** @var Credis_Client */
     protected $redis;
 
-    /** @var Mpchadwick_PageCacheHitRate_Model_Config */
-    protected $config;
-
-    public function __construct()
+    public function connection()
     {
-        $this->config = new Mpchadwick_PageCacheHitRate_Model_Config;
-        $this->logger = new Mpchadwick_PageCacheHitRate_Model_SystemLog;
+        $this->setupConnection();
+        return $this->redis;
     }
 
     protected function _track($type, array $args, $alias)
@@ -36,7 +33,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     protected function setupConnection($alias)
     {
         if (!is_null($this->redis)) {
-            return;
+            return true;
         }
 
         $prefix = 'trackers/' . $alias . '/';
@@ -57,7 +54,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
             $this->redis->connect();
             $this->redis->select($this->config->get($prefix . 'database'));
         } catch (Exception $e) {
-            $this->logger->log('Could not establish Redis connection', Zend_Log::ERR);
+            $this->logger->log($e->getMessage(), Zend_Log::ERR);
             return false;
         }
 

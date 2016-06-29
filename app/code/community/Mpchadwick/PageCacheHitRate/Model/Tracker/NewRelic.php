@@ -7,7 +7,8 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_NewRelic
     protected function _track($type, array $args, $alias)
     {
         if (!function_exists('newrelic_record_custom_event')) {
-            Mage::logException(new Exception('You are using the New Relic tracker, but don\'t have the agent set up properly'));
+            $msg = 'You are using the New Relic tracker, but don\'t have the agent set up properly';
+            $this->logger->log($msg);
             return;
         }
 
