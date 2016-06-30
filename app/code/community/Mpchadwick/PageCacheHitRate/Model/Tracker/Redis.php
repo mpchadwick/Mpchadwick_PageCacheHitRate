@@ -9,9 +9,9 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
     /** @var Credis_Client */
     protected $redis;
 
-    public function connection()
+    public function connection($alias)
     {
-        $this->setupConnection();
+        $this->setupConnection($alias);
         return $this->redis;
     }
 
