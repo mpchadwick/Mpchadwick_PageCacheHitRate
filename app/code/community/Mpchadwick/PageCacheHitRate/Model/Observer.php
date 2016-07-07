@@ -35,7 +35,6 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
             // Track any container misses for a partial cache response
             $trackContainerMisses = (string)$config->get('track_container_misses');
             if ($type === 'partial' && $trackContainerMisses) {
-                unset($params['type']);
                 $tracker->trackContainerMisses($params);
             }
         }
