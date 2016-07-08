@@ -52,7 +52,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
                 (int)$this->config->get($prefix . 'port')
             );
             $this->redis->connect();
-            (int)$this->redis->select($this->config->get($prefix . 'database'));
+            $this->redis->select((int)$this->config->get($prefix . 'database'));
         } catch (Exception $e) {
             $this->logger->log($e->getMessage(), Zend_Log::ERR);
             return false;
