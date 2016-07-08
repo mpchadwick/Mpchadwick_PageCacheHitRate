@@ -48,11 +48,11 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
 
         try {
             $this->redis = new Credis_Client(
-                $this->config->get($prefix . 'server'),
-                $this->config->get($prefix . 'port')
+                (string)$this->config->get($prefix . 'server'),
+                (int)$this->config->get($prefix . 'port')
             );
             $this->redis->connect();
-            $this->redis->select($this->config->get($prefix . 'database'));
+            (int)$this->redis->select($this->config->get($prefix . 'database'));
         } catch (Exception $e) {
             $this->logger->log($e->getMessage(), Zend_Log::ERR);
             return false;
