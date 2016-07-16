@@ -6,6 +6,9 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
 {
     const KEY_PREFIX = 'mpchadwick_pagecachehitrate_';
 
+    // Very conservative. We'd rather lose some tracking data than slow down the application
+    const DEFAULT_TIMEOUT = 0.2;
+
     /** @var Credis_Client */
     protected $redis;
 
@@ -49,9 +52,9 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
         try {
             $this->redis = new Credis_Client(
                 (string)$this->config->get($prefix . 'server'),
-                (int)$this->config->get($prefix . 'port')
+                (int)$this->config->get($prefix . 'port'),
+                self::DEFAULT_TIMEOUT
             );
-            $this->redis->connect();
             $this->redis->select((int)$this->config->get($prefix . 'database'));
         } catch (Exception $e) {
             $this->logger->log($e->getMessage(), Zend_Log::ERR);

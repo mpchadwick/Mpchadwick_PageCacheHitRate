@@ -50,7 +50,9 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_ParamProvider
 
     protected function getCustomerGroup()
     {
-        $value = $_COOKIE[Enterprise_PageCache_Model_Cookie::COOKIE_CUSTOMER_GROUP];
+        $key = Enterprise_PageCache_Model_Cookie::COOKIE_CUSTOMER_GROUP;
+        $value = empty($_COOKIE[$key]) ? '' : $_COOKIE[$key];
+
         return (string)$value;
     }
 }

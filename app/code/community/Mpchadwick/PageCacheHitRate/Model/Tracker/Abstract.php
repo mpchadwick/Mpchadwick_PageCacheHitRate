@@ -27,7 +27,7 @@ abstract class Mpchadwick_PageCacheHitRate_Model_Tracker_Abstract
         $this->_track($type, $args, $alias);
     }
 
-    public function trackContainerMisses($params)
+    public function trackContainerMisses($params, $alias)
     {
         unset($params['type']);
         $containers = Mage::registry('cached_page_containers');
@@ -35,7 +35,7 @@ abstract class Mpchadwick_PageCacheHitRate_Model_Tracker_Abstract
         foreach ($containers as $container) {
             $this->track('ContainerMiss', $params + array(
                 'container' => get_class($container),
-            ));
+            ), $alias);
         }
     }
 
