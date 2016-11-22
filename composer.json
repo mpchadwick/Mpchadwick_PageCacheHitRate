@@ -1,0 +1,28 @@
+{
+    "name": "mpchadwick/page-cache-hit-rate",
+    "description": "Hit rate tracking for Magento Page Cache.",
+    "type": "magento-module",
+    "authors": [
+        {
+            "name": "Max Chadwick",
+            "email": "mpchadwick@gmail.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+      "map": [
+        [
+          "app/code/community/Mpchadwick/PageCacheHitRate",
+          "app/code/community/Mpchadwick/PageCacheHitRate"
+        ],
+        [
+          "app/etc/mpchadwick_pagecachehitrate.xml.template",
+          "app/etc/mpchadwick_pagecachehitrate.xml.template"
+        ],
+        [
+          "app/etc/modules/Mpchadwick_PageCacheHitRate.xml",
+          "app/etc/modules/Mpchadwick_PageCacheHitRate.xml"
+        ]
+      ]
+    }
+}
