@@ -2,7 +2,7 @@
 
 class Mpchadwick_PageCacheHitRate_Model_SystemLog
 {
-    public function log($message, $level)
+    public function log($message, $level = null)
     {
         Mage::log($message, $level, $this->logFile(), true);
     }
