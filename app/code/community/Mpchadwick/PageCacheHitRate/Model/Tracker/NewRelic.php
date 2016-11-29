@@ -8,7 +8,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_NewRelic
     {
         if (!function_exists('newrelic_record_custom_event')) {
             $msg = 'You are using the New Relic tracker, but don\'t have the agent set up properly';
-            $this->logger->log($msg);
+            $this->logger->log($msg, null);
             return;
         }
 
