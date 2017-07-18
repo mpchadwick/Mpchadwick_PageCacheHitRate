@@ -1,8 +1,8 @@
-#Mpchadwick_PageCacheHitRate
+# Mpchadwick_PageCacheHitRate
 
 Hit rate tracking for Magento Page Cache.
 
-###Configuration
+### Configuration
 
 All configuration is done through an XML file in the `/app/etc` directory. This is because module configuration is not loaded in the case of a full hit. `mpchadwick_pagecachehitrate.xml.template` is included with example settings. A few notes...
 
@@ -12,7 +12,7 @@ All configuration is done through an XML file in the `/app/etc` directory. This 
 - There is a `<track_container_misses>` setting which can be used to track individual container misses in the case of partial page hits.
 - A `<metadata_source>` can be configured under the `<full_page_cache>` configuration in the case where `Enterprise_PageCache_Model_Processor` is not the correct class to provide metadata. This can happen if the `<ee>` request processor is changed, notably with `Elastera_EnterprisePageCache`.
 
-###Trackers
+### Trackers
 
 The following trackers are available...
 
@@ -22,7 +22,7 @@ The following trackers are available...
 
 You can easily create your own tracker if you'd prefer a different means of tracking. Simply implement the `Mpchadwick_PageCacheHitRate_Model_TrackerInterface` interface and configure your class as the `<tracker>` in an xml file in `/app/etc`.
 
-###Dimensions
+### Dimensions
 
 In addition to a full hit and a full miss, `Enterprise_PageCache` can also have partial hits. This happens if a cached response is found, but it has containers that need additional processing. The `type` metric is thus tracked as either a `hit`, a `miss`, or a `partial`.
 
@@ -52,7 +52,7 @@ Container misses will be recorded to a separate file (if enabled). The entries w
 
 Also note that you can configure multiple trackers. You may want to store data in both New Relic and Redis, for example.
 
-###Cardinality
+### Cardinality
 
 By default, highly cardinal dimensions are tracked such as IP address and URL. For the `Mpchadwick_PageCacheHitRate_Model_Tracker_File` and `Mpchadwick_PageCacheHitRate_Model_Tracker_NewRelic` trackers this is probably fine. However if you are using `Mpchadwick_PageCacheHitRate_Model_Tracker_Redis` and sending the data to InfluxDb or Prometheus you'll probably want to decrease the cardinality of the data.
 
