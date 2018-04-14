@@ -25,6 +25,7 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
         $params = $paramProvider->baseParams(true) + array(
             'type' => $type,
             'route' => $this->trackerRoute(),
+            'cacheable' => $this->isRequestCacheable()
         );
 
         $factory = Mage::getModel('mpchadwick_pagecachehitrate/trackerFactory');
@@ -38,6 +39,20 @@ class Mpchadwick_PageCacheHitRate_Model_Observer
                 $tracker->trackContainerMisses($params, $alias);
             }
         }
+    }
+
+    /**
+     * Determine this request is cacheable in FPC
+     *
+     * @return bool
+     */
+    protected function isRequestCacheable()
+    {
+        $request = Mage::app()->getRequest();
+        $processor = Mage::getSingleton('enterprise_pagecache/processor');
+        $subprocessor = $processor->getMetadata('cache_subprocessor');
+
+        return $subprocessor !== null && $processor->canProcessRequest($request);
     }
 
     /**
