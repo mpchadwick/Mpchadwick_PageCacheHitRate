@@ -43,6 +43,7 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
         $server = $this->config->get($prefix . 'server');
         $port = $this->config->get($prefix . 'port');
         $db = $this->config->get($prefix) . 'database';
+        $password = (string)$this->config->get($prefix . 'password');
 
         if (!$server || !$port || !$db) {
             $this->logger->log('Missing parameters for creating Redis connection', Zend_Log::ERR);
@@ -55,6 +56,9 @@ class Mpchadwick_PageCacheHitRate_Model_Tracker_Redis
                 (int)$this->config->get($prefix . 'port'),
                 self::DEFAULT_TIMEOUT
             );
+            if (!empty($password)) {
+                $this->redis->auth($password) or Mage::throwException('Unable to authenticate with the redis server.');
+            }
             $this->redis->select((int)$this->config->get($prefix . 'database'));
         } catch (Exception $e) {
             $this->logger->log($e->getMessage(), Zend_Log::ERR);
